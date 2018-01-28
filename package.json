@@ -1,0 +1,39 @@
+{
+  "name": "xmr-balance",
+  "version": "1.0.0-beta1",
+  "description": "xmr-balance",
+  "main": "./es/index.js",
+  "module": "./es/index.js",
+  "typings": "./es/index",
+  "files": [
+    "es"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/heifade/xmr-balance.git"
+  },
+  "devDependencies": {
+    "@types/node": "^9.3.0",
+    "@types/node-fetch": "^1.6.7",
+    "pcreate-config": "^1.1.2"
+  },
+  "dependencies": {
+    "chalk": "^2.3.0",
+    "mysql-i": "^4.1.2",
+    "node-fetch": "^1.7.3",
+    "yargs": "^10.1.1"
+  },
+  "scripts": {
+    "build": "pcreate build",
+    "start": "pcreate build && node ./es/index.js",
+    "test": "pcreate test"
+  },
+  "keywords": [
+    "xmr-balance"
+  ],
+  "author": "heifade",
+  "license": "MIT",
+  "bin": {
+    "xmr-balance": "./es/bin/xmr-balance"
+  }
+}

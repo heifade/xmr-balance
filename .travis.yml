@@ -1,0 +1,25 @@
+
+language: node_js
+sudo: enabled
+node_js:
+  - "8"
+before_script:
+  - npm i pcreate
+  - pcreate test -c
+script:
+  - pcreate build
+after_script:
+
+cache:
+  directories:
+    - node_modules
+
+deploy:
+  - provider: npm
+    skip_cleanup: true
+    email: heifade@126.com
+    api_key: $NPM_TOKEN
+    on:
+      branch: master
+      repo: heifade/xmr-balance
+  
