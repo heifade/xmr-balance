@@ -55,6 +55,7 @@ let pars = option("d", {
   }).argv;
 
 let lastBalance = 0;
+let lastDate: Date;
 
 async function getXmr() {
   let balance = await getXmrBalance(pars.d);
@@ -64,10 +65,22 @@ async function getXmr() {
   let balanceVal = toValue(balance.toString(), 12);
   let incrementVal = toValue(increment.toString(), 12);
 
+  let seconds: number;
+  let date = new Date();
+
+  let incrementSecond = 0;
+  if (lastDate) {
+    seconds = (date.getTime() - lastDate.getTime()) / 1000;
+    incrementSecond = increment / seconds;
+  }
+
+  lastDate = date;
+
   await save({
     balance: balanceVal,
     increment: incrementVal,
-    createDate: new Date()
+    incrementPerSecond: incrementSecond,
+    createDate: date
   });
 }
 
@@ -81,15 +94,16 @@ async function save(data: any) {
   });
 
   await Save.save(conn, {
-    data: { balance: data.balance, increment: data.increment, createDate: data.createDate },
+    data: { balance: data.balance, increment: data.increment, create_date: data.createDate, increment_second: data.incrementPerSecond },
     table: "balance", // 表名
     saveType: SaveType.insert //插入
   });
 }
 
 async function begin() {
-  setInterval(() => {
-    getXmr();
+  getXmr();
+  setTimeout(() => {
+    begin();
   }, Number(pars.f) * 1000);
 }
 
