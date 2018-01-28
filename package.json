@@ -1,6 +1,6 @@
 {
   "name": "xmr-balance",
-  "version": "1.0.0-beta3",
+  "version": "1.0.2",
   "description": "xmr-balance",
   "main": "./es/index.js",
   "module": "./es/index.js",
