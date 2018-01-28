@@ -25,7 +25,7 @@
   },
   "scripts": {
     "build": "pcreate build",
-    "start": "pcreate build && node ./es/index.js -f 10 -i 192.168.1.100 -u root -p soft -b xmr -o 3306 ",
+    "start": "pcreate build && node ./es/index.js -f 10 -i 192.168.1.100 -u root -p soft -b xmr -o 3306 -d 431tSjKUSuT9Ljqt5oPhuaJiDXbhx4h17CowoQjErCRzL2GLgoFawGbTkQyw8D6LKiMTaFXjAseNi9DHRWqoN51UCfak7Vs",
     "test": "pcreate test"
   },
   "keywords": [

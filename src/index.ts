@@ -60,44 +60,55 @@ let lastDate: Date;
 async function getXmr() {
   let balance = await getXmrBalance(pars.d);
 
-  let increment = lastBalance ? balance - lastBalance : 0;
+  let increment = lastDate ? balance - lastBalance : 0;
 
   let balanceVal = toValue(balance.toString(), 12);
   let incrementVal = toValue(increment.toString(), 12);
 
-  let seconds: number;
+  let seconds: number = 0;
   let date = new Date();
 
-  let incrementSecond = 0;
+  
   if (lastDate) {
     seconds = (date.getTime() - lastDate.getTime()) / 1000;
-    incrementSecond = increment / seconds;
   }
 
-  lastDate = date;
+  
+
+  console.log(1, balanceVal, seconds, balance, lastBalance);
 
   await save({
     balance: balanceVal,
     increment: incrementVal,
-    incrementPerSecond: incrementSecond,
+    seconds: seconds,
     createDate: date
   });
+
+  lastDate = date;
+  lastBalance = balance;
 }
 
 async function save(data: any) {
-  let conn = await ConnectionHelper.create({
-    host: pars.databaseServer,
-    user: pars.user,
-    password: pars.password,
-    database: pars.database,
-    port: pars.port
-  });
+  let conn = null;
+  try {
+    conn = await ConnectionHelper.create({
+      host: pars.databaseServer,
+      user: pars.user,
+      password: pars.password,
+      database: pars.database,
+      port: pars.port
+    });
 
-  await Save.save(conn, {
-    data: { balance: data.balance, increment: data.increment, create_date: data.createDate, increment_second: data.incrementPerSecond },
-    table: "balance", // 表名
-    saveType: SaveType.insert //插入
-  });
+    await Save.save(conn, {
+      data: { balance: data.balance, increment: data.increment, create_date: data.createDate, use_time: data.seconds },
+      table: "balance", // 表名
+      saveType: SaveType.insert //插入
+    });
+    await ConnectionHelper.close(conn);
+  } catch (e) {
+    await ConnectionHelper.close(conn);
+    console.log(chalk.red(e));
+  }
 }
 
 async function begin() {
