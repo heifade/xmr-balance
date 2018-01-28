@@ -68,14 +68,9 @@ async function getXmr() {
   let seconds: number = 0;
   let date = new Date();
 
-  
   if (lastDate) {
     seconds = (date.getTime() - lastDate.getTime()) / 1000;
   }
-
-  
-
-  console.log(1, balanceVal, seconds, balance, lastBalance);
 
   await save({
     balance: balanceVal,
