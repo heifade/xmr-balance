@@ -1,6 +1,6 @@
 {
   "name": "xmr-balance",
-  "version": "1.0.10",
+  "version": "1.0.11",
   "description": "xmr-balance",
   "main": "./es/index.js",
   "module": "./es/index.js",
@@ -21,7 +21,7 @@
     "chalk": "^2.3.0",
     "mysql-i": "^4.1.2",
     "node-fetch": "^1.7.3",
-    "yargs": "^10.1.1"
+    "yargs": "^11.0.0"
   },
   "scripts": {
     "build": "pcreate build",
