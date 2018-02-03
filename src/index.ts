@@ -107,7 +107,18 @@ async function save(data: any) {
 }
 
 async function begin() {
-  getXmr();
+  try {
+    getXmr();
+  } catch (e) {
+    console.log(chalk.red("失败，重试一次"));
+    try {
+      getXmr();
+      console.log(chalk.green("重试成功"));
+    } catch (e) {
+      console.log("重试失败，不再重试！");
+    }
+  }
+
   setTimeout(() => {
     begin();
   }, Number(pars.f) * 1000);
