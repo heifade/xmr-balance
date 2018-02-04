@@ -1,7 +1,6 @@
-
 import { ProjectConfigModel } from "pcreate-config";
 
-let projectConfig: ProjectConfigModel = {
+let projectConfig = {
   projectType: "node",
   compile: {
     outDir: "./es/",
@@ -17,4 +16,3 @@ let projectConfig: ProjectConfigModel = {
 };
 
 export default projectConfig;
-    
